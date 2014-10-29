@@ -1,0 +1,77 @@
+{% load pagination_tags %}
+
+<style type="text/css">
+     .complaintTableTtitle{
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 15px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+     }
+     .opTh{
+          cursor: pointer;
+          color: red;
+     }
+</style>
+
+<div class= "complaintTableTtitle">
+     投诉列表
+</div>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; border-radius: 0px">
+     <thead> 
+          <tr>              
+               <th class= "opTh" style= "width: 10%">
+                    投诉ID
+                    {% if orderID %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderID %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 10%">用户ID</th>
+               <th style= "width: 20%">投诉标题</th>
+               <th class= "opTh" style= "width: 10%">
+                    投诉时间
+                    {% if orderCommitTime %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderCommitTime %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 10%">联系时间类型</th>
+               <th style= "width: 10%">处理人</th>
+               <th class= "opTh" style= "width: 10%">
+                    处理状态
+                    {% if orderStatus %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderStatus %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 10%">操作</th>
+          </tr>
+     </thead>
+     <tbody>   
+          {% autopaginate complaintList 10 %}
+          {% for complaint in complaintList %}
+               <tr>
+                    <td>{{complaint.complaintid}}</td>
+                    <td>{{complaint.cuserid}}</td>
+                    <td>{{complaint.cticketsubject}}</td>
+                    <td>{{complaint.ccommittime}}</td>
+                    <td>{{complaint.ccontacttimetype}}</td>
+                    <td>{{complaint.chandler}}</td>
+                    <td>{{complaint.cstatus}}</td>
+                    <td><span id= "opSpanCheck" class= 'opSpan'>查看</span> | <span id= "opSpanSelectHandler" class= 'opSpan'>指定处理人</span></td>
+               </tr>    
+          {% endfor %}       
+     </tbody>
+</table>
+{% paginate %}

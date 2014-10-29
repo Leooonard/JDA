@@ -1,0 +1,78 @@
+{% load pagination_tags %}
+
+<style type="text/css">
+     .repairTableTitle{
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 20px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+          cursor: move;
+     }
+     .opTh{
+          cursor: pointer;
+          color: red;
+     }
+</style>
+
+<div class= "repairTableTitle">
+     维修列表
+</div>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; border-radius: 0px">
+     <thead>
+          <tr>              
+               <th class= "opTh" style= "width: 10%;">
+                    ID号
+                    {% if orderID %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderID %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 10%;">用户ID号</th>
+               <th style= "width: 25%;">维修单标题</th>
+               <th style= "width: 10%;">期待联系时间</th>
+               <th style= "width: 10%;">处理人</th>
+               <th class= "opTh" style= "width: 10%;">
+                    处理状态                  
+                    {% if orderStatus %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderStatus %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th class= "opTh" style= "width: 10%;">
+                    提交时间
+                    {% if orderCommitTime %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderCommitTime %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 15%;">操作</th>
+          </tr>
+     </thead>
+     <tbody>   
+          {% autopaginate repairList 10 %}
+          {% for repair in repairList %}
+               <tr>
+                    <td>{{repair.repairticketid}}</td>
+                    <td>{{repair.ruserid}}</td>
+                    <td>{{repair.rticketsubject}}</td>
+                    <td>{{repair.rcontacttime}}</td>
+                    <td>{{repair.rhandler}}</td>
+                    <td>{{repair.rstatus}}</td>
+                    <td>{{repair.rticketcommittime}}</td>
+                    <td><span id= "opSpanCheck" class= 'opSpan'>查看</span> | <span id= "opSpanSelectHandler" class= 'opSpan'>指定处理人</span></td>
+               </tr>    
+          {% endfor %}       
+     </tbody>
+</table>
+{% paginate %}

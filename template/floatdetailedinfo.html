@@ -1,0 +1,181 @@
+<div class= "floatDetailedInfo absoluteCenter">
+    <div class= "title">
+    </div>
+    <div class= "body">
+        
+    </div>
+    <div class= "footer">
+        <button class= "btn btn-primary" id= "functionalBtn"></button>
+        <button class= "btn btn-primary" id= "closeBtn">关闭</button>
+    </div>
+</div>
+<style type="text/css">
+      .absoluteCenter{
+          position: absolute;
+          margin: auto;
+          top: 0px;
+          left: 0px;
+          right: 0px;
+          bottom: 0px;
+     }
+     .floatDetailedInfo{
+          display: none;
+          width: 600px;
+          height: 330px;
+          box-shadow: 0px 2px 5px 3px rgba(0,0,0,.265);  
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          z-index: 1600;
+          padding-bottom: 20px;
+          background-color: white;
+     }
+     .floatDetailedInfo .title{
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          width: 580px;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 20px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+          cursor: move;
+     }
+     .floatDetailedInfo .body{
+          background: url("/static/image/loading.gif") no-repeat center;
+          background-color: white;
+          height: 230px;
+          padding: 10px;
+          width: 580px;
+          overflow: auto;
+     }
+     .floatDetailedInfo .footer{
+          background-color: white;
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+     }
+</style>
+<script type="text/javascript">
+      $(document).ready(function(){
+          var mouseDownPointer= {
+              x: 0,
+              y: 0
+          };
+          var titleMouseMove= function(e, mouseDownPointer){
+              var event= e|| window.event;
+              var $this= $(this);
+              var $parent= $this.parent();
+              var nowPointer= {
+                  x: event.pageX,
+                  y: event.pageY
+              };
+              var left= parseInt($parent.css('left'));
+              var top= parseInt($parent.css('top'));
+              $parent.css('left', (left+ 1.8* (nowPointer.x- mouseDownPointer.x))+ 'px');
+              $parent.css('top', (top+ 1.8* (nowPointer.y- mouseDownPointer.y))+ 'px');
+              mouseDownPointer.x= nowPointer.x;
+              mouseDownPointer.y= nowPointer.y;
+          };
+
+          var $floatDetailedInfo= $(".floatDetailedInfo");
+          console.log($floatDetailedInfo.find(".title"));
+          var $floatDetailedInfoTitle= $floatDetailedInfo.find(".title");
+          $floatDetailedInfoTitle.mousedown(function(e){
+              var event= e|| window.event;
+              var $this= $(this);
+              if(event.which== 1){
+                  mouseDownPointer.x= event.pageX;
+                  mouseDownPointer.y= event.pageY;
+                  $(document.body).mousemove(function(e){
+                      titleMouseMove.call($this, e, mouseDownPointer);
+                      return false;
+                  });
+                  $(document.body).mouseup(function(){
+                      $this.unbind("mousemove");
+                      $(this).unbind("mousemove");
+                      $(this).unbind("mouseup");
+                      return false;
+                  });
+
+                  //还要改变对话框的z-index顺序.
+                  $this.closest("div.floatDetailedInfo").css("z-index", getMaxZindex().toString());
+              }
+              return false;
+          });
+
+          var $floatDetailedInfoBody= $floatDetailedInfo.find(".body");
+
+          var $closeBtn= $floatDetailedInfo.find("#closeBtn");
+          $closeBtn.click(function(){
+              $(this).closest("div.floatDetailedInfo").remove();
+          });
+
+
+          var getMaxZindex= function(){
+                /*
+                    获取最大的z-index
+                */
+
+                if(!window.floatDetailedInfoArray|| window.floatDetailedInfoArray.length== 0){
+                    window.floatDetailedInfoArray= new Array();
+                    return 1600; //如果不存在该数组, 或数组内没有元素, 直接返回默认z-index值.
+                }
+                var maxZindex= parseInt(window.floatDetailedInfoArray[0].css("z-index"));
+                for(var i= 1; i< window.floatDetailedInfoArray.length; i++){
+                    if(parseInt(window.floatDetailedInfoArray[i].css("z-index"))> maxZindex){
+                        maxZindex= parseInt(window.floatDetailedInfoArray[i].css("z-index"));
+                    }
+                }
+                if(maxZindex== 2499){ //默认的最大z-index值2499. 2500为loading的z-index值.
+                    //需要重新调整全局的z-index值.
+                    if(window.floatDetailedInfoArray.length== 900){
+                        //说明900个z-index值已经用完. 直接返回最大值.
+                        return maxZindex;
+                    }else{
+                        //z-index值没有被用完, 进行全局调整.(还没想好算法, 以后解决)
+                    }
+                }else{
+                    //直接返回最大值加1.
+                    return maxZindex+ 1;
+                }
+          };
+
+          //创建对话框.
+          window.CreateFloatDetailedInfo= function(title, bodyContent, functionalBtnText, functionalBtnCallback){
+                var $info= $floatDetailedInfo.clone(true);
+                $info.find(".title").text(title|| "用户详细信息"); //设置抬头文字.
+
+                if(bodyContent){ //设置对话框内容
+                    $info.find(".body").append(bodyContent);
+                    $info.find(".body").css("background", "white");
+                }
+
+                //如果功能按钮的文字, 回调都没设置. 则隐藏按钮.
+                if(!functionalBtnText&& !functionalBtnCallback){
+                    $info.find(".footer").find("#functionalBtn").css("display", "none");
+                }else{    
+                    $info.find(".footer").find("#functionalBtn").text(functionalBtnText|| "功能按钮");
+                    if(functionalBtnCallback&& typeof(functionalBtnCallback)== "function"){
+                        $info.find(".footer").find("#functionalBtn").click(functionalBtnCallback);
+                    }
+                }
+
+                //把对话框推入body.
+                $info.css("display", "block");
+                $info.css("z-index", getMaxZindex().toString());
+                $(document.body).append($info);
+
+                //最后要把对话框推入数组存放. 之后要对他们的z-index进行操作.
+                window.floatDetailedInfoArray.push($info);
+                return $info;
+          };
+
+          window.AppendContentToFloatUserDetailedInfoBody= function(info, content){
+                info.find(".body").append(content);
+                info.find(".body").css("background", "white");
+          }
+      });
+</script>

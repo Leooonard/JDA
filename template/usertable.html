@@ -1,0 +1,77 @@
+{% load pagination_tags %}
+
+<style type="text/css">
+     .userListTtitle{
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 20px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+     }
+     .opTh{
+          cursor: pointer;
+          color: red;
+     }
+</style>
+
+<div class= "userListTtitle">
+     注册用户列表
+</div>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; border-radius: 0px">
+     <thead> 
+          <tr>              
+               <th class= "opTh">
+                    ID号
+                    {% if orderID %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderID %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th>昵称</th>
+               <th class= "opTh">
+                    认证
+                    {% if orderRole %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderRole %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th>密码</th>
+               <th class= "opTh">
+                    注册日期
+                    {% if orderRegTime %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderRegTime %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th>电话号码</th>
+               <th>性别</th>
+               <th>操作</th>
+          </tr>
+     </thead>
+     <tbody>   
+          {% autopaginate userList 20 %}
+          {% for user in userList %}
+               <tr>
+                    <td>{{user.uid}}</td>
+                    <td>{{user.unickname}}</td>
+                    <td>{{user.urole}}</td>
+                    <td>{{user.upassword}}</td>
+                    <td>{{user.uregtime}}</td>
+                    <td>{{user.uphone}}</td>
+                    <td>{{user.ugender}}</td>
+                    <td><span id= "opSpanCheck" class= 'opSpan'>查看</span> | <span id= "opSpanIdentify" class= 'opSpan'>认证</span></td>
+               </tr>    
+          {% endfor %}       
+     </tbody>
+</table>
+{% paginate %}

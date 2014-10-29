@@ -1,0 +1,75 @@
+<style type="text/css">
+    .absoluteCenter{
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    }
+    .alertDialog{
+        display: none;
+        width: 400px;
+        height: 180px;
+        box-shadow: 0 1px 5px 3px rgba(0,0,0,.065);  
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        z-index: 2600;
+    }      
+    .alertDialog .title{
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        width: 380px;
+        height: 20px;
+        padding: 10px;
+        line-height: 20px;
+        font-size: 20px;
+        background-color: #08c;
+        color: white;
+        text-align: center;
+    }
+    .alertDialog .body{
+        background-color: white;
+        height: 100px;
+        width: 100%;
+        text-align: center;
+        line-height: 100px;
+        font-size: 15px;
+    }
+    .alertDialog .footer{       
+        background-color: white;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var $alertDialog= $(".alertDialog");
+        window.ShowAlertDialog= function(title, body, confirmCallback){
+            var titleText= title|| "确认";
+            var bodyText= body|| "是否确认?";
+            $alertDialog.css("display", "block");
+            $alertDialog.find(".title").text(titleText);
+            $alertDialog.find(".body").text(bodyText);
+            if(confirmCallback&& typeof(confirmCallback== "function")){
+                $alertDialog.find("#confirmBtn").click(function(e){
+                    confirmCallback(e, $alertDialog);
+                    return false;
+                });
+            }else{
+                $alertDialog.find("#confirmBtn").unbind("click");
+            }
+        };
+    });
+</script>
+<div class= "alertDialog absoluteCenter">
+    <div class= "title">
+    </div>
+    <div class= "body">
+    </div>
+    <div class= "footer">
+        <button class= "btn btn-primary" id= "confirmBtn">确认</button>
+    </div>
+</div>

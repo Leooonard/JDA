@@ -1,0 +1,76 @@
+{% load pagination_tags %}
+
+<style type="text/css">
+     .userListTtitle{
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 20px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+          cursor: move;
+     }
+     .opTh{
+          cursor: pointer;
+          color: red;
+     }
+</style>
+
+<div class= "userListTtitle">
+     公告列表
+</div>
+<table class= "table table-hover table-striped" style= "background-color: white; border-radius: 0px">
+     <thead>
+          <tr>              
+               <th class= 'opTh' style= "width: 10%;">
+                    ID号
+                    {% if orderID %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderID %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th class= 'opTh' style= "width: 10%;">
+                    所属小区
+                    {% if orderBio %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderBio %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 10%;">发布者</th>
+               <th class= 'opTh' style= "width: 10%;">
+                    发布时间
+                    {% if orderPubTime %}
+                         <i class= "icon-arrow-down"></i>
+                    {% endif %}
+                    {% if rorderPubTime %}
+                         <i class= "icon-arrow-up"></i>
+                    {% endif %}
+               </th>
+               <th style= "width: 10%;">过期时间</th>
+               <th style= "width: 30%;">公告标题</th>
+               <th style= "width: 10%;">操作</th>
+          </tr>
+     </thead>
+     <tbody>   
+          {% autopaginate noticeList 10 %}
+          {% for notice in noticeList %}
+               <tr>
+                    <td>{{notice.noticeid}}</td>
+                    <td>{{notice.nbiotopeid}}</td>
+                    <td>{{notice.nposter}}</td>
+                    <td>{{notice.npubtime}}</td>
+                    <td>{{notice.nexptime}}</td>
+                    <td>{{notice.nsubject}}</td>
+                    <td><span id= "opSpanCheck" class= 'opSpan'>查看</span> | <span id= "opSpanUpdate" class= 'opSpan'>更新</span></td>
+               </tr>    
+          {% endfor %}       
+     </tbody>
+</table>
+{% paginate %}

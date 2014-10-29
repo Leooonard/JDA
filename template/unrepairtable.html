@@ -1,0 +1,37 @@
+<style type="text/css">
+     .unrepairListTtitle{
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 15px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+          margin: 0 -10px;
+          margin-bottom: 10px;
+     }
+</style>
+
+<div class= "unrepairListTtitle">
+     未处理报修单列表
+</div>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; border-radius: 0px">
+     <thead> 
+          <tr>              
+               <th style= "width: 25%">报修单ID</th>
+               <th style= "width: 25%">用户ID</th>
+               <th style= "width: 50%">报修标题</th>
+          </tr>
+     </thead>
+     <tbody>   
+          {% for unrepair in unrepairList %}
+               <tr>
+                    <td>{{unrepair.repairticketid}}</td>
+                    <td>{{unrepair.ruserid}}</td>
+                    <td><a href="#" class= "unrepairTitle">{{unrepair.rticketsubject}}</a></td>
+               </tr>    
+          {% endfor %}       
+     </tbody>
+</table>

@@ -1,0 +1,47 @@
+<p style= "text-align: center; font-weight: bolder; font-size: 1.3em;">{{complaint.cticketsubject}}</p>
+<p style= "text-align: center;">{{complaint.ccommittime}}</p>
+<div>
+    <span style= "display: block; font-weight: bolder; margin: 10px 0px;">投诉内容:</span>
+    {% if complaint.cticketcontent %}
+        {{complaint.cticketcontent}}
+    {% else %}
+        无.
+    {% endif %}
+</div>
+<span style= "display: block; font-weight: bolder; margin: 10px 0px;">投诉详细信息:</span>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; margin: 0px; border-radius: 0px;">
+     <thead>
+          <tr>              
+               <th style= "width: 25%;">ID号</th>
+               <th style= "width: 25%;">用户ID号</th>
+               <th style= "width: 25%;">联系时间类型</th>
+               <th style= "width: 25%;">投诉次数</th>
+          </tr>
+     </thead>
+     <tbody>   
+        <tr>
+            <td>{{complaint.complaintid}}</td>
+            <td>{{complaint.cuserid}}</td>
+            <td>{{complaint.ccontacttimetype}}</td>
+            <td>{{complaint.cresumetimes}}</td>
+        </tr>       
+     </tbody>
+</table>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; margin: 0px; border-radius: 0px;">
+     <thead>
+          <tr>              
+               <th style= "width: 25%;">联系人</th>
+               <th style= "width: 25%;">联系人联系方式</th>
+               <th style= "width: 25%;">投诉状态</th>
+               <th style= "width: 25%;">投诉更新时间</th>
+          </tr>
+     </thead>
+     <tbody>   
+        <tr>
+            <td>{{complaint.chandler}}</td>
+            <td>{{complaint.chandlerphone}}</td>
+            <td>{{complaint.cstatus}}</td>
+            <td>{{complaint.cupdatetime}}</td>
+        </tr>       
+     </tbody>
+</table>

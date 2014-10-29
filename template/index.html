@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+     {% load staticfiles %}
+     {% load pagination_tags %}
+     <head>
+          <title>信息管理系统</title>
+          <!-- Bootstrap -->
+          <link href= "/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+          <link href= "/static/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+          <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+          <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+          <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <![endif]-->
+          <script src= "/static/script/jquery-1.11.1.min.js"></script>
+          <script src= "/static/script/bootstrap.min.js"></script>     
+          <!-- 配置文件 -->
+          <script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+          <!-- 编辑器源码文件 -->
+          <script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
+
+            {# 时钟插件 #}
+            <link rel="stylesheet" type="text/css" href="/static/css/flipclock.css">
+            <script src="/static/script/flipclock.min.js"></script>
+
+            <script type="text/javascript" src= "/static/script/index.js"></script>
+     </head>
+	
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+                            <li style= "line-height: 40px;">
+                                <a href="#" style= "padding: 0px;">未读消息:<span class="badge">0</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> 
+                                    <i class="icon-user"></i>您好, <span class= 'userName'></span><i class="caret"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a tabindex="-1" href="#">个人详细</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a tabindex="-1" href="login.html">退出</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="#" id= "indexBtn">首页</a>
+                            </li>                        
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id= "content" class="container">
+          <div class="row">
+               <ul class="panel-group span3 nav nav-pills nav-stacked" id="sideNav" role="tablist" aria-multiselectable="true">
+                    <li>
+                         <div class="panel panel-default">
+                              <div class="panel-heading">
+                                   <span class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#sideNav" href="#registedUserList" aria-expanded="false" aria-controls="registedUserList">
+                                        注册用户
+                                        </a>
+                                   </span>
+                              </div>
+                               <div id="registedUserList" class="panel-collapse collapse" role="tabpanel">
+                                   <div class="panel-body">
+                                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                                             <li role="presentation"><a href="#"><i class= 'icon-chevron-right pull-right'></i>注册用户名单</a></li>
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div> 
+                    </li>
+                    <li>               
+                         <div class="panel panel-default">
+                              <div class="panel-heading">
+                                   <span class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#sideNav" href="#repairAndComplaintList" aria-expanded="false" aria-controls="repairAndComplaintList">
+                                        报修, 投诉
+                                        </a>
+                                   </span>
+                              </div>
+                              <div id="repairAndComplaintList" class="panel-collapse collapse" role="tabpanel">
+                                   <div class="panel-body">
+                                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                                             <li role="presentation"><a href="#" id= "repairList"><i class= 'icon-chevron-right pull-right'></i>报修列表</a></li>
+                                             <li role="presentation"><a href="#" id= "complaintList"><i class= 'icon-chevron-right pull-right'></i>投诉列表</a></li>
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div>
+                    </li>
+                    <li>               
+                         <div class="panel panel-default">
+                              <div class="panel-heading">
+                                   <span class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#sideNav" href="#noticeList" aria-expanded="false" aria-controls="noticeList">
+                                        社区
+                                        </a>
+                                   </span>
+                              </div>
+                              <div id="noticeList" class="panel-collapse collapse" role="tabpanel">
+                                   <div class="panel-body">
+                                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                                             <li role="presentation"><a id= "checkNoticeList" href="#"><i class= 'icon-chevron-right pull-right'></i>查看小区公告</a></li>
+                                             <li role="presentation"><a id= "releaceNotice" href="#"><i class= 'icon-chevron-right pull-right'></i>发布小区公告</a></li>
+                                        </ul>
+                                   </div>
+                              </div>
+                         </div>
+                    </li>
+               </ul>
+                
+                <!--/span-->
+                <div class="span9" id ="tableContent">
+                    <div class= "welcomeTable tc">
+                        <div class= "row">
+                            <div class= "offset1 span1 weatherTable tc" style= "margin-top: 30px;"></div>
+                            <div class= "offset2 span6" style= "margin-top: -30px;">
+                                <div class= "clock" style= "height: 40px;"></div>
+                            </div>
+                        </div>
+                        <div class= "row">
+                            <p class= "welcomeWord">您好, 欢迎使用信息管理系统!</p>
+                        </div>
+                        <div class= "row">
+                            <div class= "span4 unrepairTable">
+                                
+                            </div>
+                            <div class= "span4 unsolvecomplaintTable">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "userListTable tc">         
+                    </div>
+                    <div class= "repairListTable tc">
+                      
+                    </div>
+                    <div class= "complaintListTable tc">
+                      
+                    </div>
+                    <div class= "noticeListTable tc">
+                    </div>
+                    <div class= "noticeContent tc">
+
+                    </div>
+                    <form action= "" class= "writeNoticeForm form-horizontal tc">
+                        <div class= "ntitle">
+                            新公告
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="nsubject">文章标题</label>
+                            <div class="controls">
+                                <input class="input-xlarge" id="nsubject" type="text" maxLength= "50" required>
+                                <span class="help-inline">最多50个字符</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="nbiotopeid">所属小区</label>
+                            <div class="controls">
+                                <input class="input-xlarge" id="nbiotopeid" type="text" maxLength= "20" required>
+                                <span class="help-inline">最多20个字符</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="nposter">发布者</label>
+                            <div class="controls">
+                                <input class="input-xlarge" id="nposter" type="text" maxLength= "20" required>
+                                <span class="help-inline">最多20个字符</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                              <label class="control-label" for="nistop">是否置顶</label>
+                              <div class="controls">
+                                <label>
+                                  <input type="checkbox" id="nistop" >
+                                  置顶
+                                </label>
+                              </div>
+                        </div>
+                        <div class= "control-group">
+                            <label class= "control-label" for= "ncontent">公告内容:</label>
+                        </div>
+                        <textarea id= "ncontent"  maxLength= "400" required></textarea>
+                        <div style= "text-align: center; ">
+                            <button type="submit" class="btn btn-primary" style= "margin: 20px 0px;" id= "submitBtn">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <footer>
+                <p>&copy; Leooonard, 2014</p>
+            </footer>
+        </div>
+          <div class= 'loadingScreen'></div>
+          <p class= 'loadingWord absoluteCenter'>请稍后...</p>
+          {% include "confirmdialog.html" %}
+          {% include "alertdialog.html" %}
+          {% include "floatdetailedinfo.html" %}
+    </body>
+    {#<script src="http://lab.wangyuanwai.com/weather/v3/jquery.weather.build.min.js?parentbox=div.weatherTable&moveArea=all&moveArea=limit&zIndex=1&move=1&move=0&drag=1&drag=0&autoDrop=0&autoDrop=1&styleSize=big&styleSize=small&style=default&style=medialoot&style=meteocons&style=blue&style=cartoon-1&style=cartoon-2&style=cartoon-3&style=_random&time=1414036242&area=client&area=assign&city=%E4%B8%8A%E6%B5%B7"></script>#}
+
+</html>

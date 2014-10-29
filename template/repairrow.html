@@ -1,0 +1,73 @@
+<p style= "text-align: center; font-weight: bolder; font-size: 1.3em;">{{repair.rticketsubject}}</p>
+<p style= "text-align: center;">{{repair.rticketcommittime}}</p>
+<div>
+    <span style= "display: block; font-weight: bolder; margin: 10px 0px;">维修单内容:</span>
+    {% if repair.rticketcontent %}
+        {{repair.rticketcontent}}
+    {% else %}
+        无.
+    {% endif %}
+</div>
+<div>
+    <span style= "display: block; font-weight: bolder; margin: 10px 0px;">维修单评论:</span>
+    {% if repair.rcomment %}
+        {{repair.rcomment}}
+    {% else %}
+        无.
+    {% endif %}
+</div>
+<span style= "display: block; font-weight: bolder; margin: 10px 0px;">维修单详细信息:</span>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; margin: 0px; border-radius: 0px;">
+     <thead>
+          <tr>              
+               <th style= "width: 25%;">ID号</th>
+               <th style= "width: 25%;">用户ID号</th>
+               <th style= "width: 25%;">联系人</th>
+               <th style= "width: 25%;">联系人电话</th>
+          </tr>
+     </thead>
+     <tbody>   
+        <tr>
+            <td>{{repair.repairticketid}}</td>
+            <td>{{repair.ruserid}}</td>
+            <td>{{repair.rcontactpeople}}</td>
+            <td>{{repair.rcontactphone}}</td>
+        </tr>       
+     </tbody>
+</table>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; margin: 0px; border-radius: 0px;">
+     <thead>
+          <tr>              
+               <th style= "width: 25%;">联系人时间</th>
+               <th style= "width: 25%;">维修处理人</th>
+               <th style= "width: 25%;">处理人电话</th>
+               <th style= "width: 25%;">维修次数</th>
+          </tr>
+     </thead>
+     <tbody>   
+        <tr>
+            <td>{{repair.rhandler}}</td>
+            <td>{{repair.rhandlerphone}}</td>
+            <td>{{repair.rresumetimes}}</td>
+            <td>{{repair.rstatus}}</td>
+        </tr>       
+     </tbody>
+</table>
+<table class= "table table-hover table-striped table-bordered" style= "background-color: white; margin: 0px; border-radius: 0px;">
+     <thead>
+          <tr>              
+               <th style= "width: 25%;">维修状态</th>
+               <th style= "width: 25%;">更新时间</th>
+               <th style= "width: 25%;">RCOUNT</th>
+               <th style= "width: 25%;">维修单处理时间</th>
+          </tr>
+     </thead>
+     <tbody>   
+        <tr>
+            <td>{{repair.rstatus}}</td>
+            <td>{{repair.rupdatetime}}</td>
+            <td>{{repair.rcount}}</td>
+            <td>{{repair.rtickethandletime}}</td>
+        </tr>       
+     </tbody>
+</table>

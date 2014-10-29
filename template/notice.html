@@ -1,0 +1,89 @@
+<style type="text/css">
+     .noticeWrapper{
+          background-color: white;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          padding: 0 20px;
+          padding-bottom: 20px;
+          box-shadow: 0 1px 4px 4px rgba(0,0,0,.065);
+          position: relative;
+     }
+     .noticeHead{
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          margin: 0 -20px;
+          background-color: #08c;
+          color: white;
+          text-align: center;
+          height: 20px;
+          padding: 10px;
+          line-height: 20px;
+          font-size: 20px;
+          margin-bottom: 30px;
+          font-weight: bolder;
+     }
+     .noticeReturnBtn{
+          position: absolute;
+          top: 50px;
+          left: 20px;
+     }
+     .noticeTitle{
+         text-align: center;
+         font-weight: bolder;
+         font-size: 25px;
+         line-height: 25px;
+         padding: 0 60px;
+         margin: 10px;
+     }
+     .noticePubTimeAndPoster{
+          text-align: right;
+          margin: 15px;
+     }
+</style>
+
+<script type="text/javascript">
+     $(document).ready(function(){
+          function ConvertPureTextToHtml(){
+               var $noticeContentText= $("div.noticeWrapper div.noticeContentText");
+               $noticeContentText.get(0).innerHTML= decodeURIComponent($noticeContentText.text());;
+          }
+          window.ConvertPureTextToHtml= ConvertPureTextToHtml;
+     });
+</script>
+<div class= "noticeWrapper">
+     <p class= "noticeHead">
+        公告
+     </p>
+     <button class= "btn btn-primary noticeReturnBtn">返回</button>
+     <p class= "noticeTitle">{{notice.nsubject}}</p>
+     <p class= "noticePubTimeAndPoster">{{notice.npubtime}} by {{notice.nposter}}</p>
+     <table class= "table table-hover table-striped table-bordered">
+          <thead> 
+               <tr>              
+                    <th style= "width: 10%;">公告ID</th>
+                    <th style= "width: 10%;">所属小区</th>
+                    <th style= "width: 20%;">过期时间</th>
+                    <th style= "width: 20%;">标签</th>
+                    <th style= "width: 10%;">是否置顶</th>
+                    <th style= "width: 10%;">是否删除</th>
+                    <th style= "width: 20%;">更新时间</th>
+               </tr>
+          </thead>
+          <tbody>   
+               <tr>
+                    <td>{{notice.noticeid}}</td>
+                    <td>{{notice.nbiotopeid}}</td>
+                    <td>{{notice.nexptime}}</td>
+                    <td>{{notice.nlabel}}</td>
+                    <td>{{notice.nistop}}</td>
+                    <td>{{notice.nisdeleted}}</td>
+                    <td>{{notice.updatetime}}</td>
+               </tr>    
+          </tbody>
+     </table>
+     <div class= "noticeContentText">
+          {{notice.ncontent}}
+     </div>
+</div>
+
+                        

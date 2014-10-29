@@ -1,0 +1,178 @@
+html{
+     overflow-y: hidden;
+ }
+html, body{
+     background-color: #f5f5f5;
+     font-family: Helvetica, Microsoft Yahei;
+     overflow-x: hidden;
+     height: 100%;
+}
+a, a:hover{
+     text-decoration: none;
+}
+#content{
+     margin-top: 41px;
+     padding-top: 20px;
+}
+#sideNav{
+     box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     border-top-left-radius: 15px;
+     border-top-right-radius: 15px;
+}
+#sideNav ul{
+     margin-bottom: 0px;
+}
+#sideNav>li:first-child .panel-heading{
+     border-top-left-radius: 15px;
+     border-top-right-radius: 15px;
+}
+#sideNav>li{
+     background-color: white;
+     border-top-left-radius: 15px;
+     border-top-right-radius: 15px;
+     border-bottom: solid 1px #f5f5f5;
+     text-align: center;
+}
+.panel-heading{
+     background-color: white;
+     font-size: 1.2em;
+     font-weight: bolder;
+}
+#sideNav>li.active .panel-heading{
+     background-color: #08c;
+}
+/*一级菜单下的超链接*/
+#sideNav>li.active a{
+     color: white;
+}
+span.panel-title{
+     display: block;
+     width: 100%;
+     height: 100%;
+}
+span.panel-title a{
+     display: block;
+     height: 100%;
+     padding: 15px;
+}
+.panel-body a{
+     margin-top: 0px !important;
+     margin-bottom: 0px !important;
+     background-color: white !important;
+     color: #08c !important;
+     font-size: 1em !important; 
+}
+.panel-body li{
+     border-top: solid 1px #f5f5f5;
+     border-bottom: solid 1px #f5f5f5;
+}
+.panel-body li.active a{
+     color: #005580 !important;
+     font-weight: bolder !important;
+}
+.panel-body li:last-child{
+     border-bottom: none;
+}
+i.icon-chevron-right{
+     background-image: url("/static/image/glyphicons-halflings.png") !important;
+}
+.welcomeWord{
+     text-align: center;
+     height: 40px;
+     line-height: 40px;
+     font-size: 20px;
+     font-weight: bolder;
+     margin: 20px 0;
+}
+.unrepairTable{
+     min-height: 400px;
+     background: url("/static/image/loading.gif") no-repeat center;
+       border-top-left-radius: 20px;
+       border-top-right-radius: 20px;
+       padding: 0 10px;
+     box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.unsolvecomplaintTable{
+     min-height: 400px;
+     background: url("/static/image/loading.gif") no-repeat center;
+       border-top-left-radius: 20px;
+       border-top-right-radius: 20px;
+       padding: 0 10px;
+     box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.opSpan{
+     color: #08c;
+     cursor: pointer;
+}
+.userListTable{
+     display: none;
+     background: url("/static/image/loading.gif") no-repeat center;
+     min-height: 600px;
+}
+.repairListTable{
+     display: none;
+     background: url("/static/image/loading.gif") no-repeat center;
+     min-height: 600px;
+}
+.noticeListTable{
+     display: none;
+     background: url("/static/image/loading.gif") no-repeat center;
+     min-height: 600px;
+}
+.noticeContent{
+     display: none;
+     background: url("/static/image/loading.gif") no-repeat center;
+     min-height: 600px;
+}
+.loadingScreen{
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     width: 100%;
+     height: 100%;
+     z-index: 2500;
+     background-color: black;
+     opacity: 0.6;
+     display: none;
+}
+.loadingWord{
+     width: 100%;
+     height: 60px;
+     line-height: 60px;
+     font-size: 60px;
+     text-align: center;
+     color: black;
+     display: none;
+}
+.absoluteCenter{
+     position: absolute;
+     margin: auto;
+     top: 0px;
+     left: 0px;
+     right: 0px;
+     bottom: 0px;
+}
+ .writeNoticeForm{       
+     min-height: 600px;
+     background-color: white;
+     border-radius: 10px;
+     box-shadow: 0 1px 4px 2px rgba(0,0,0,.065);
+     display: none;
+ }
+ .writeNoticeForm #ncontent{
+     width: 90%;
+     margin: 0 auto;
+ }
+.writeNoticeForm .ntitle{
+     border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+     background-color: #08c;
+     color: white;
+     text-align: center;
+     height: 20px;
+     padding: 10px;
+     line-height: 20px;
+     font-size: 20px;
+     margin-bottom: 30px;
+     font-weight: bolder;
+}
